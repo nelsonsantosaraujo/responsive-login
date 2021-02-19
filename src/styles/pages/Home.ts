@@ -31,6 +31,10 @@ export const Content = styled.div`
   width: 100%;
   max-width: 600px;
 
+  @media(max-width: 768px) {
+    max-width: 455px;
+  }
+
   section {
     max-width: 256px;
 
