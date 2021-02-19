@@ -3,14 +3,13 @@ import styled, { css } from 'styled-components';
 import BackgroundLogin from '../../assets/background-login.png';
 
 interface FormGroupProps {
-  id: string;
   isValid: boolean;
 }
 
 interface ContentProps {
   hasInputError: boolean;
 }
-
+ 
 export const Container = styled.div`
   height: 100vh;
 

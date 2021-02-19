@@ -74,7 +74,7 @@ const Home: React.FC = () => {
           </h4>
           <Form onSubmit={handleSubmit}>
             <label htmlFor="email">E-MAIL</label>
-            <FormGroup id="input_email" isValid={emailIsValid}>
+            <FormGroup isValid={emailIsValid}>
               <div>
                 <input 
                   type="email" 
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
             </FormGroup>
 
             <label htmlFor="password">SENHA</label>
-            <FormGroup id="input_password" isValid={passwordIsValid}>
+            <FormGroup isValid={passwordIsValid}>
               <div>
                 <input 
                   type="password" 
