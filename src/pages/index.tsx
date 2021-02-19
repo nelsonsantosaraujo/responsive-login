@@ -1,8 +1,8 @@
 import React, { FormEvent, useCallback, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { Container, Background, Content, Form, FormGroup } from '../styles/pages/Home';
 import { FiX } from 'react-icons/fi';
-
 
 import api from '../services/api';
 
@@ -18,6 +18,7 @@ interface Response {
 }
 
 const Home: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailIsValid, setEmailIsValid] = useState(true);
@@ -50,9 +51,20 @@ const Home: React.FC = () => {
     };
 
     try {
-      const response: Response = await api.post('users', formData);
-      console.log(response);
-      // history.push('/dashboard');
+      setLoading(true);
+      const { data } = await api.post('users', formData);
+      console.log(data);
+
+      const userInfo: Response = {
+        token: data.token,
+        name: data.name,
+        email: data.email,
+      }
+
+      localStorage.setItem('@Wiser:login', JSON.stringify(userInfo));
+      setLoading(false);
+
+      history.push('/dashboard');
 
     } catch(err) {
       console.log(err);
@@ -104,13 +116,21 @@ const Home: React.FC = () => {
               <p>Digite sua senha.</p>
             </FormGroup>
 
-            <button type="submit">ENTRAR</button>
+            {loading 
+            ? (
+              <button type="button" disabled>Aguarde...</button>
+            ) 
+            : (
+              <button type="submit">ENTRAR</button>
+            )}
           </Form>
           <small>
             Esqueceu seu login ou senha?
-            <a href="login">
-              Clique <span>aqui</span>
-            </a>
+            <Link href="/forgot-password">
+              <a>
+                Clique <span>aqui</span>
+              </a>
+            </Link>
           </small>
 
         </section>
