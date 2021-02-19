@@ -7,25 +7,27 @@ interface IUserInfos {
 }
 
 const Dashboard: React.FC = () => {
-  const [user, setUser] = useState<IUserInfos>(() => {
+  const [user, setUser] = useState<IUserInfos>();
+
+  useEffect(() => {
     const userInfos = localStorage.getItem('@Wiser:login');
     if(userInfos) {
-      return JSON.parse(userInfos);
-    } else {
-      return;
+      setUser(JSON.parse(userInfos));
     }
-  });
+  },[]);
 
   return (
     <>
       <h1>
         Dashboard
       </h1>
-      <ul>
-        <li>Token: {user.token}</li>
-        <li>Nome: {user.name}</li>
-        <li>E-mail: {user.email}</li>
-      </ul>
+      { user && (
+        <ul>
+          <li>Token: {user.token}</li>
+          <li>Nome: {user.name}</li>
+          <li>E-mail: {user.email}</li>
+        </ul>
+      )}
     </>
   )
 }
