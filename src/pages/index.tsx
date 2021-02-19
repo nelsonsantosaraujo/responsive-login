@@ -64,12 +64,10 @@ const Home: React.FC = () => {
     <>
     <Container>
       <Background />
-      <Content>
+      <Content hasInputError={emailIsValid !== passwordIsValid}>
         <section>
-          <h2>
-            Olá, seja 
-            bem-vindo!
-          </h2>
+          <h2>Olá, seja</h2>
+          <h2>bem-vindo!</h2>
           <h4>
             Para acessar a plataforma,
             faça seu login.

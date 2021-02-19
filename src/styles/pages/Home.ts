@@ -1,11 +1,14 @@
 import styled, { css } from 'styled-components';
 
-// import BackgroundLogin from '../../assets/background-login.png';
-import BackgroundLogin from '../../assets/background-image.png';
+import BackgroundLogin from '../../assets/background-login.png';
 
 interface FormGroupProps {
   id: string;
   isValid: boolean;
+}
+
+interface ContentProps {
+  hasInputError: boolean;
 }
 
 export const Container = styled.div`
@@ -13,16 +16,24 @@ export const Container = styled.div`
 
   display: flex;
   align-items: stretch;
+
+  @media(max-width: 425px){
+    background-color: #130525;
+  }
 `;
 
 export const Background = styled.div`
   flex: 1;
-  background: linear-gradient(0deg, #130525 0%, rgba(105, 57, 153, 0) 100%),
-              url(${BackgroundLogin}) no-repeat center;
+  background: url(${BackgroundLogin}) no-repeat center;
   background-size: cover;
+
+  @media(max-width: 425px){
+    background-size: contain;
+    background-position: top center;
+  }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<ContentProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,47 +41,91 @@ export const Content = styled.div`
 
   width: 100%;
   max-width: 600px;
+  height: 100vh;
 
   @media(max-width: 768px) {
     max-width: 455px;
   }
 
+  @media(max-width: 425px) {
+    flex: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   section {
     max-width: 256px;
 
+    h2 {
+    font-size: 40px;
+    line-height: 48px;
+    color: #383E71;
+    }
+
+    h4 {
+      font-weight: 16px;
+      line-height: 20px;
+      font-weight: 600;
+      color: #989FDB;
+      margin-top: 16px;
+    }
+
+    small {
+      font-size: 14px;
+      line-height: 20px;
+      color: #989FDB;
+      text-align: center;
+      display: block;
+      margin: 32px auto 0;
+
+      
+      a {
+        display: block;
+        text-decoration: none;
+        
+        span {
+          color: #9626AC;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    @media(max-width: 425px) {
+      max-width: 311px;
+      height: 54%;
+      background: #FAF5FF;
+      border-radius: 8px;
+      padding: 24px;
+
+      ${ props => 
+          props.hasInputError && css`
+            height: 57%;
+          `
+      }
+
       h2 {
-      font-size: 40px;
-      line-height: 48px;
-      color: #383E71;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
       }
 
       h4 {
-        font-weight: 16px;
+        font-size: 12px;
         line-height: 20px;
-        font-weight: 600;
-        color: #989FDB;
-        margin-top: 16px;
       }
 
       small {
-        font-size: 14px;
-        line-height: 20px;
-        color: #989FDB;
-        text-align: center;
-        display: block;
-        margin: 32px auto 0;
+        color: #FAF5FF;
 
-        
         a {
-          display: block;
-          text-decoration: none;
-          
           span {
-            color: #9626AC;
-            text-decoration: underline;
+            color: #FAF5FF;
           }
         }
       }
+    }
 
     }
 
@@ -99,7 +154,13 @@ export const Form = styled.form`
 
     background: linear-gradient(267.79deg, #383E71 0%, #9D25B0 99.18%);
     box-shadow: 0 10px 25px 0 #CF99DB;
+
+    @media(max-width: 425px) {
+      box-shadow: none;
+    }
   }
+
+
 `;
 
 export const FormGroup = styled.div<FormGroupProps>`
